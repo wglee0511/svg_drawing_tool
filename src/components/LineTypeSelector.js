@@ -9,12 +9,6 @@ const LineTypeSelector = () => {
   return (
     <Wrapper>
       <Btn
-        onClick={() => setLineType(theme.type.normal)}
-        isClicked={lineType === theme.type.normal ? true : false}
-      >
-        {theme.type.normal}
-      </Btn>
-      <Btn
         onClick={() => {
           setLineType(theme.type.line);
           setCountPoint(0);
@@ -45,20 +39,14 @@ const LineTypeSelector = () => {
         {theme.type.circle}
       </Btn>
       <Btn
-        onClick={() => setLineType(theme.type.rect)}
-        isClicked={lineType === theme.type.rect ? true : false}
-      >
-        {theme.type.rect}
-      </Btn>
-      <Btn
-        onClick={() => {
-          setLineType(theme.type.tri);
+        onClick={() =>{ 
+          setLineType(theme.type.rect)
           setCountPoint(0);
           setPoints([]);
         }}
-        isClicked={lineType === theme.type.tri ? true : false}
+        isClicked={lineType === theme.type.rect ? true : false}
       >
-        {theme.type.tri}
+        {theme.type.rect}
       </Btn>
       <Btn
         onClick={() => {

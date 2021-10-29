@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { LineDataContext } from "../common/context/LineDataContext";
 import theme from "../styles/theme";
 
 const ColorController = (props) => {
-  const { setColor } = props;
+  const lineContext= useContext(LineDataContext);
+  const {setColor} = lineContext;
   const [nowColor, setNowColor] = useState(theme.color.black);
 
   return (

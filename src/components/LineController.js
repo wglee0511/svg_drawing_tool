@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import styled from "styled-components";
+import { LineDataContext } from "../common/context/LineDataContext";
 
 const LineController = (props) => {
-  const { setLine, line } = props;
-
+const lineContext = useContext(LineDataContext);
+const {line, setLine} = lineContext;
   let inputRef = useRef(null);
   const handleLineChange = (event) => {
     const size = event.target.value;
