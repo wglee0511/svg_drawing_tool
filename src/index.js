@@ -1,14 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./styles/index.css";
+import App from "./common/App";
+import reportWebVitals from "./reportWebVitals";
+import { LineDataProvider } from "./common/context/LineDataContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LineDataProvider>
+      <App />
+    </LineDataProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
