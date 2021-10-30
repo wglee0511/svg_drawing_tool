@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { LineDataContext } from "../common/context/LineDataContext";
 import theme from "../styles/theme";
@@ -6,26 +6,72 @@ import theme from "../styles/theme";
 const DoController = () => {
   const lineContext = useContext(LineDataContext);
   const {
-    renderRef,
-    draw,
+    realArr,
     setImageArr,
     setIndex,
     arrIndex,
     imageArr,
     setPoints,
     setCountPoint,
+    canvasRef,
   } = lineContext;
 
-  const handleClear = () => {};
-  const handleUndo = () => {};
-  const handleRedo = () => {};
-  const handleSave = () => {};
+  const handleClear = () => {
+    setImageArr([])
+    setPoints([])
+    setCountPoint(0)
+    setIndex((-1))
+  };
+  const handleUndo = () => {
+    setPoints([])
+    setCountPoint(0)
+    if(arrIndex == -1) {
+      return
+    }
+    const lastImageArrIndex = imageArr.length - 1
+    if (lastImageArrIndex == arrIndex) {
+      setIndex(prev => prev -= 1)
+      if(arrIndex == 0){
+        setImageArr([])
+      } else {
+        const newArrForUndo = realArr.slice(0, lastImageArrIndex)
+        setImageArr([...newArrForUndo])
+      } 
+    } else {
+      setIndex(prev => prev -= 1)
+      const newArrForUndo = realArr.slice(0, lastImageArrIndex)
+      setImageArr([...newArrForUndo])
+    
+    }
+    
+
+  };
+  const handleRedo = () => {
+    setPoints([])
+    setCountPoint(0)
+    const lastImageArrIndex = realArr.length - 1
+    if(lastImageArrIndex == arrIndex){
+      return
+    } 
+      setIndex(prev => prev += 1)
+      const newArrForUndo = realArr.slice(0, arrIndex+2)
+      setImageArr([...newArrForUndo])
+    
+  };
+  const handleSave = () => {
+    const canvas = canvasRef.current;
+    const image = canvas.toDataURL("image/svg+xml");
+    const link = document.createElement("a");
+
+    link.href = image;
+    link.download = "Canvas";
+    link.click();
+  };
   return (
     <Wrapper>
       <Btn onClick={handleClear}>Clear</Btn>
       <Btn onClick={handleUndo}>Undo</Btn>
       <Btn onClick={handleRedo}>Redo</Btn>
-      <Btn onClick={handleSave}>Save</Btn>
     </Wrapper>
   );
 };

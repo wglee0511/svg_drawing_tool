@@ -14,7 +14,7 @@ const Description = () => {
     } else if (type === theme.type.normal) {
       return "드래그 하여 선을 그려주세요.";
     } else if (type === theme.type.arc) {
-      return "반경을 입력하고 곡선의 시작점, 곡면의 방향점, 방향점과 이어지는 원의 접선방향 점을 클릭해 주세요.";
+      return "시작점, 제어점, 제어점, 끝점 순으로 클릭하세요.";
     } else if (type === theme.type.circle) {
       return "빈경을 입력하고 원의 중심을 클릭하세요.";
     } else if (type === theme.type.rect) {
@@ -39,7 +39,7 @@ const Description = () => {
 
   return (
     <Wrapper>
-      {(lineType === theme.type.arc || lineType === theme.type.circle || lineType=== theme.type.poly) && (
+      { (lineType === theme.type.circle || lineType=== theme.type.poly) && (
         <>
           <form
             onSubmit={handleOnSubmit}
